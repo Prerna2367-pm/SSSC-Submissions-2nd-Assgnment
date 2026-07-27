@@ -5,6 +5,7 @@ let user = {
     name: "",
     email: ""
 };
+
 const loginForm = document.getElementById("loginForm");
 const loginPage = document.getElementById("loginPage");
 const quizPage = document.getElementById("quizPage");
@@ -16,12 +17,13 @@ const options = document.getElementById("options");
 const nextBtn = document.getElementById("nextBtn");
 const previousBtn = document.getElementById("previousBtn");
 const submitBtn = document.getElementById("submitBtn");
+
 loginForm.addEventListener("submit", function(e){
     e.preventDefault();
     user.name = document.getElementById("name").value;
     user.email = document.getElementById("email").value;
-    if(user.name === "" || user.email === ""){
-        alert("Please enter your details");
+    if(user.name === "" || user.email === "" || !user.email.includes("@gmail.com")){
+        alert("Please fill the details correctly");
         return;
     }
     fetch("/questions")
@@ -34,6 +36,7 @@ loginForm.addEventListener("submit", function(e){
         showQuestion();
     });
 });
+
 function showQuestion(){
     let q = questions[currentQuestion];
     questionNumber.innerText =
